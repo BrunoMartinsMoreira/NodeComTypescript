@@ -1,13 +1,10 @@
-import express from 'express'
+import express from 'express';
+import { routes } from './Routes';
 
-const app = express()
+const app = express();
 
-app.get('/', (req, res) => {
- return res.json({
-   message: 'Olá'
- })
-})
+app.use(routes);
 
-app.listen(3333, ()=>{
-  console.log('Server is running on port 3333!')
-})
+app.listen(3333, () => {
+  console.log('Server is running on port 3333')
+});
