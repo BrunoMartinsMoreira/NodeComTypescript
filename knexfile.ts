@@ -6,7 +6,7 @@ module.exports = {
     filename: resolve(__dirname,'src', 'database', 'database.sqlite')
   },
   migrations: {
-    filename: resolve(__dirname,'src', 'database', 'migrations')
+    directory: resolve(__dirname,'src', 'database', 'migrations')
   },
   useNullAsDefault: true,
 }
