@@ -5,7 +5,8 @@
   "author": "Bruno Martins Moreira <bruno_moreira.19@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "dependencies": {
     "express": "^4.17.3",
