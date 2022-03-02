@@ -1,9 +1,9 @@
 import express from 'express';
-import { routes } from './Routes';
+import { router } from './routes';
 
 const app = express();
 
-app.use(routes);
+app.use(router);
 
 app.listen(3333, () => {
   console.log('Server is running on port 3333')
