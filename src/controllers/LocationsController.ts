@@ -24,20 +24,24 @@ class LocationsController{
       uf,
     };
 
-    const newId: Array<number> = await knex('locations').insert(location);//retorna um [] com o id da inserção
-    const locationId:number = newId[0];
+    const transaction = await knex.transaction();
+
+    const newId: Array<number> = await transaction('locations').insert(location);//retorna um [] com o id da inserção
+    const location_id:number = newId[0];
 
     const locationItems = items.map((item_id: number) => {
       return {
         item_id,
-        location_id: locationId
+        location_id
       }
     })
 
-    await knex('location_items').insert(locationItems)
+    await transaction('location_items').insert(locationItems);
+
+    await transaction.commit();
 
     return res.json({
-      id: locationId,
+      id: location_id,
       ...location
     });
   }
