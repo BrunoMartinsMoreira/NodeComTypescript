@@ -29,7 +29,15 @@ class LocationsController{
     const newId: Array<number> = await transaction('locations').insert(location);//retorna um [] com o id da inserção
     const location_id:number = newId[0];
 
-    const locationItems = items.map((item_id: number) => {
+    const locationItems = items.map(async (item_id: number) => {
+      const itemExits = await transaction('items').where('id', item_id).first();
+
+      if(!itemExits){
+        return res.status(400).json({
+          message: 'Item not found'
+        })
+      }
+      
       return {
         item_id,
         location_id
