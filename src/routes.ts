@@ -5,9 +5,10 @@ import { LocationsController } from "./controllers/LocationsController";
 const router = Router();
 
 const itemsController = new ItemsController();
-const locationsControler = new LocationsController();
+const locationsController = new LocationsController();
 
 router.get('/items', itemsController.list);
-router.post('/locations', locationsControler.create);
+router.post('/locations', locationsController.create);
+router.get('/:id', locationsController.findOneLocation)
 
 export {router}

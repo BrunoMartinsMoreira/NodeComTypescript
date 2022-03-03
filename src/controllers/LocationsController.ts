@@ -37,7 +37,7 @@ class LocationsController{
           message: 'Item not found'
         })
       }
-      
+
       return {
         item_id,
         location_id
@@ -51,6 +51,34 @@ class LocationsController{
     return res.json({
       id: location_id,
       ...location
+    });
+  }
+
+  async findOneLocation(req:Request, res:Response){
+    const { id } = req.params;
+
+    if(!id){
+      return res.status(400).json({
+        error: 'invalid location'
+      })
+    }
+
+    const location = await knex('locations').where('id', id).first();
+
+    if(!location){
+      return res.status(400).json({
+        error: 'location not found'
+      })
+    }
+
+    const items = await knex('items')
+      .join('location_items', 'items.id', '=', 'location_items.item_id')
+      .where('location_items.location_id', id)
+      .select('items.title')
+
+    return res.json({
+      location,
+      items
     });
   }
 }
