@@ -86,6 +86,13 @@ class LocationsController{
     try{
       const { city, uf, items } = req.query;
 
+      const queryItems = { city, uf, items};
+
+      if(!queryItems){
+        const locations = await knex('locations').select('*');
+        return res.json(locations);
+      }
+
       const parsedItems: Number[] =  String(items).split(',').map(item => Number(item.trim()));
   
       const locations = await knex('locations')
@@ -94,9 +101,8 @@ class LocationsController{
         .where('city', String(city))
         .where('uf', String(uf))
         .distinct()
-        .select('locations.*')
-  
-      return res.json(locations);
+        .select('locations.*');
+        return res.json(locations);   
     }catch(err){
       return res.status(400).json({
         error: 'Informe parâmetros válidos'
