@@ -9,6 +9,7 @@ const locationsController = new LocationsController();
 
 router.get('/items', itemsController.list);
 router.post('/locations', locationsController.create);
-router.get('/:id', locationsController.findOneLocation)
+router.get('/:id', locationsController.findOneLocation);
+router.get('/location',locationsController.findAllLocations);
 
 export {router}
