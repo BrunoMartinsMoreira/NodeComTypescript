@@ -86,9 +86,7 @@ class LocationsController{
     try{
       const { city, uf, items } = req.query;
 
-      const parsedItems = <any> String(items).split(',').map(item => {
-        Number(item.trim());
-      });
+      const parsedItems: Number[] =  String(items).split(',').map(item => Number(item.trim()));
   
       const locations = await knex('locations')
         .join('location_items', 'locations.id', '=', 'location_items.location_id')
