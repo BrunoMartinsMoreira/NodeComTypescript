@@ -10,6 +10,8 @@
     "knex:seed": "knex --knexfile knexfile.ts seed:run"
   },
   "dependencies": {
+    "@types/cors": "^2.8.12",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "knex": "0.95.15",
     "sqlite3": "^5.0.2"
