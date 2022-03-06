@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ItemsController } from "./controllers/ItemsController";
 import { LocationsController } from "./controllers/LocationsController";
-import { UsersController } from "./controllers/usersController";
+import { UsersController } from "./controllers/UsersController";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ const usersController = new UsersController();
 router.get('/items', itemsController.list);
 router.post('/locations', locationsController.create);
 router.get('/:id', locationsController.findOneLocation);
-router.get('/location',locationsController.findAllLocations);
+router.get('/locations',locationsController.findAllLocations);
 router.post('/users', usersController.create);
 router.get('/users', usersController.listUsers);
 
