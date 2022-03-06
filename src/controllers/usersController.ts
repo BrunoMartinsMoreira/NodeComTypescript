@@ -29,14 +29,23 @@ class UsersController{
         ...user
       })
     }catch(err){
-      return res.json(err)
+      return res.status(400).json({
+        message: 'ocorreu um erro'
+      })
     }
     
   }
   
   async listUsers(req:Request, res:Response){
-    const users = await knex('users').select('*');
-    return res.json(users);
+    try {
+      const users = await knex('users').select('*');
+      return res.json(users);
+    } catch (err) {
+      return res.status(400).json({
+        message: 'ocorreu um erro'
+      })
+    }
+    
   }
 }
 
