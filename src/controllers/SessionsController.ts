@@ -23,7 +23,7 @@ class SessionsController {
     const isPasswordValid = await compare(password, user.password);
 
     if(!isPasswordValid){
-      return res.status(418).json({
+      return res.status(401).json({
         error: 'username or password is invalid.'
       })
     }
@@ -32,12 +32,14 @@ class SessionsController {
       {},
       process.env.SIGNATURE_TOKEN,
       {
-        subject:user.id,
+        subject: String(user.id),
         expiresIn: "1d"
       }
     )
 
-    return res.json(token);
+    return res.json({
+      token: token
+    });
     
   }
 }
