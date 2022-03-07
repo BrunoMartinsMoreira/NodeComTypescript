@@ -15,7 +15,7 @@ class SessionsController {
     const user = await knex('users').where('email', email).first();
 
     if(!user){
-      return res.status(418).json({
+      return res.status(401).json({
         error: 'username or password is invalid.'
       })
     }
